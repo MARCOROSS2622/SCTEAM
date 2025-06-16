@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SHIPPING CLUB - Feedback Discord</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-bg: #0a1726;
+      --accent: #6ed0ff;
+      --box-bg: #16263a;
+      --star: #6ed0ff;
+      --star-selected: #fff200;
+      --text: #eaf6ff;
+      --button-bg: #6ed0ff;
+      --button-hover: #3bb6e0;
+      --input-bg: #22334a;
+      --input-border: #6ed0ff;
+    }
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: var(--main-bg);
+      margin: 0;
+      padding: 0;
+      color: var(--text);
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: var(--box-bg);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px 0 rgba(110,208,255,0.15);
+      padding: 32px 28px 40px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 18px;
+      justify-content: center;
+    }
+    .logo-title img {
+      width: 70px;
+      height: 70px;
+      border-radius: 12px;
+      background: #101d2e;
+      box-shadow: 0 2px 12px 0 rgba(110,208,255,0.10);
+    }
+    .logo-title h1 {
+      font-size: 2.2rem;
+      color: var(--accent);
+      margin: 0;
+      letter-spacing: 1px;
+      font-weight: 700;
+      text-shadow: 0 2px 8px #0008;
+    }
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      background: #18304a;
+      border-radius: 10px;
+      padding: 18px 22px;
+      font-size: 1.15rem;
+      box-shadow: 0 2px 8px 0 rgba(110,208,255,0.07);
+    }
+    .stats span {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    .stars {
+      font-size: 2.2rem;
+      cursor: pointer;
+      color: var(--star);
+      margin-bottom: 12px;
+      user-select: none;
+    }
+    .stars .selected {
+      color: var(--star-selected);
+      text-shadow: 0 0 8px #fff20099;
+    }
+    .feedback-form {
+      background: #14223a;
+      border-radius: 10px;
+      padding: 22px 18px 18px 18px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 8px 0 rgba(110,208,255,0.07);
+    }
+    .feedback-form label {
+      display: block;
+      margin: 12px 0 4px 2px;
+      font-weight: 500;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+    .feedback-form input, .feedback-form textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1.5px solid var(--input-border);
+      background: var(--input-bg);
+      color: var(--text);
+      font-size: 1rem;
+      margin-bottom: 10px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      resize: none;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .feedback-form input:focus, .feedback-form textarea:focus {
+      border: 2px solid var(--accent);
+    }
+    .feedback-form button {
+      background: var(--button-bg);
+      color: #0a1726;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px 0 rgba(110,208,255,0.10);
+    }
+    .feedback-form button:hover {
+      background: var(--button-hover);
+    }
+    .comments-section {
+      margin-top: 18px;
+      background: #16263a;
+      border-radius: 10px;
+      padding: 20px 18px 10px 18px;
+      box-shadow: 0 2px 8px 0 rgba(110,208,255,0.07);
+    }
+    .comments-section h2 {
+      color: var(--accent);
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .comment {
+      background: #18304a;
+      border-radius: 8px;
+      padding: 12px 14px 10px 14px;
+      margin-bottom: 12px;
+      text-align: left;
+      box-shadow: 0 1px 4px 0 rgba(110,208,255,0.04);
+      position: relative;
+    }
+    .comment .comment-header {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1rem;
+      margin-bottom: 2px;
+    }
+    .comment .comment-stars {
+      font-size: 1.1rem;
+      color: var(--star-selected);
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .comment .comment-body {
+      color: var(--text);
+      font-size: 1rem;
+      margin-top: 2px;
+      word-break: break-word;
+    }
+    @media (max-width: 600px) {
+      .container { padding: 10px 2vw 20px 2vw; }
+      .logo-title img { width: 48px; height: 48px; }
+      .logo-title h1 { font-size: 1.3rem; }
+      .stats { flex-direction: column; gap: 8px; padding: 12px 8px; }
+      .feedback-form { padding: 12px 6px 10px 6px; }
+      .comments-section { padding: 10px 6px 6px 6px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo-title">
+      <img src="logo.png" alt="Shipping Club Logo" />
+      <h1>SHIPPING CLUB<br><span style="font-size:1rem;font-weight:400;color:#eaf6ff;">Feedback Discord</span></h1>
+    </div>
+    <div class="stats">
+      <div>⭐ Voto medio: <span id="average-rating">-</span></div>
+      <div>🗳️ Numero feedback: <span id="total-feedback">0</span></div>
+    </div>
+    <form class="feedback-form" id="feedback-form" autocomplete="off">
+      <div class="stars" id="star-container">
+        <span data-value="1">&#9733;</span>
+        <span data-value="2">&#9733;</span>
+        <span data-value="3">&#9733;</span>
+        <span data-value="4">&#9733;</span>
+        <span data-value="5">&#9733;</span>
+      </div>
+      <input type="hidden" id="rating" name="rating" value="0" />
+      <label for="name">Nome</label>
+      <input type="text" id="name" name="name" maxlength="30" required placeholder="Il tuo nome" autocomplete="off"/>
+      <label for="surname">Cognome</label>
+      <input type="text" id="surname" name="surname" maxlength="30" required placeholder="Il tuo cognome" autocomplete="off"/>
+      <label for="comment">Commento</label>
+      <textarea id="comment" name="comment" rows="3" maxlength="250" required placeholder="Scrivi il tuo feedback..."></textarea>
+      <button type="submit">Aggiungi Feedback</button>
+    </form>
+    <div class="comments-section">
+      <h2>Ultimi feedback</h2>
+      <div id="comments-list">
+        <!-- I commenti appariranno qui -->
+      </div>
+    </div>
+    <div id="admin-panel" style="display:none;margin-top:30px;background:#101d2e;padding:18px 14px;border-radius:10px;box-shadow:0 2px 8px 0 rgba(110,208,255,0.10);">
+      <h2 style="color:var(--accent);font-size:1.1rem;">Pannello Admin</h2>
+      <div id="admin-feedback-list"></div>
+    </div>
+    <div id="admin-login" style="margin-top:30px;text-align:center;">
+      <button id="show-login-form" style="background:var(--button-bg);color:#0a1726;border:none;border-radius:6px;padding:10px 28px;font-size:1.1rem;font-weight:700;cursor:pointer;">LOGIN</button>
+      <div id="login-form" style="display:none;margin-top:18px;">
+        <input type="text" id="admin-username" placeholder="Username admin" style="padding:7px 12px;border-radius:6px;border:1.5px solid var(--input-border);background:var(--input-bg);color:var(--text);font-size:1rem;margin-bottom:8px;"><br>
+        <input type="password" id="admin-password" placeholder="Password admin" style="padding:7px 12px;border-radius:6px;border:1.5px solid var(--input-border);background:var(--input-bg);color:var(--text);font-size:1rem;">
+        <button onclick="adminLogin()" style="background:var(--button-bg);color:#0a1726;border:none;border-radius:6px;padding:7px 18px;font-size:1rem;font-weight:700;cursor:pointer;margin-left:8px;">Entra</button>
+        <div id="admin-error" style="color:#fff200;margin-top:8px;font-size:0.95rem;"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Stelle rating
+    const stars = document.querySelectorAll("#star-container span");
+    const ratingInput = document.getElementById("rating");
+    let selectedRating = 0;
+
+    stars.forEach(star => {
+      star.addEventListener("mouseenter", () => {
+        const val = parseInt(star.getAttribute("data-value"));
+        stars.forEach((s, i) => {
+          s.classList.toggle("selected", i < val);
+        });
+      });
+      star.addEventListener("mouseleave", () => {
+        stars.forEach((s, i) => {
+          s.classList.toggle("selected", i < selectedRating);
+        });
+      });
+      star.addEventListener("click", () => {
+        selectedRating = parseInt(star.getAttribute("data-value"));
+        ratingInput.value = selectedRating;
+        stars.forEach((s, i) => {
+          s.classList.toggle("selected", i < selectedRating);
+        });
+      });
+    });
+    document.getElementById("star-container").addEventListener("mouseleave", () => {
+      stars.forEach((s, i) => {
+        s.classList.toggle("selected", i < selectedRating);
+      });
+    });
+
+    // Gestione feedback
+    const form = document.getElementById("feedback-form");
+    const commentsList = document.getElementById("comments-list");
+    const averageDisplay = document.getElementById("average-rating");
+    const totalFeedbackDisplay = document.getElementById("total-feedback");
+
+    // Dati feedback in memoria locale
+    let feedbacks = JSON.parse(localStorage.getItem("shippingclub_feedbacks") || "[]");
+
+    function updateStats() {
+      const total = feedbacks.length;
+      totalFeedbackDisplay.textContent = total;
+      if (total === 0) {
+        averageDisplay.textContent = "-";
+      } else {
+        const avg = (feedbacks.reduce((sum, f) => sum + f.rating, 0) / total).toFixed(1);
+        averageDisplay.textContent = avg;
+      }
+    }
+
+    function renderComments() {
+      commentsList.innerHTML = "";
+      if (feedbacks.length === 0) {
+        commentsList.innerHTML = `<div style="color:#6ed0ff;opacity:0.7;">Nessun feedback ancora. Sii il primo!</div>`;
+        return;
+      }
+      // Mostra ultimi 8 feedback, più recenti in alto
+      feedbacks.slice(-8).reverse().forEach(fb => {
+        const commentDiv = document.createElement("div");
+        commentDiv.className = "comment";
+        commentDiv.innerHTML = `
+          <div class="comment-header">
+            ${fb.name} ${fb.surname}
+            <span class="comment-stars">${"&#9733;".repeat(fb.rating)}${"&#9734;".repeat(5-fb.rating)}</span>
+          </div>
+          <div class="comment-body">${fb.comment.replace(/</g,"&lt;").replace(/>/g,"&gt;")}</div>
+        `;
+        commentsList.appendChild(commentDiv);
+      });
+    }
+
+    // Impedire feedback multipli dallo "stesso IP" (simulato con localStorage)
+    function hasAlreadyVoted() {
+      return !!localStorage.getItem("shippingclub_voted");
+    }
+    function setVotedFlag() {
+      localStorage.setItem("shippingclub_voted", "1");
+    }
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      if (hasAlreadyVoted()) {
+        alert("Hai già inviato un feedback da questo dispositivo.");
+        return;
+      }
+      const rating = parseInt(ratingInput.value);
+      const name = form.name.value.trim();
+      const surname = form.surname.value.trim();
+      const comment = form.comment.value.trim();
+
+      if (!rating || rating < 1 || rating > 5) {
+        alert("Seleziona un numero di stelle.");
+        return;
+      }
+      if (!name || !surname || !comment) {
+        alert("Compila tutti i campi.");
+        return;
+      }
+      if (name.length > 30 || surname.length > 30) {
+        alert("Nome e cognome troppo lunghi.");
+        return;
+      }
+      if (comment.length > 250) {
+        alert("Commento troppo lungo.");
+        return;
+      }
+
+      // Salva feedback
+      feedbacks.push({ name, surname, rating, comment });
+      localStorage.setItem("shippingclub_feedbacks", JSON.stringify(feedbacks));
+      setVotedFlag();
+
+      // Reset form
+      form.reset();
+      selectedRating = 0;
+      stars.forEach(s => s.classList.remove("selected"));
+      ratingInput.value = 0;
+
+      updateStats();
+      renderComments();
+    });
+
+    // Admin Panel
+    const ADMIN_USER = "admin";
+    const ADMIN_PASSWORD = "Smene1234";
+    document.getElementById('show-login-form').onclick = function() {
+      document.getElementById('show-login-form').style.display = 'none';
+      document.getElementById('login-form').style.display = 'block';
+    };
+
+    function adminLogin() {
+      const user = document.getElementById("admin-username").value;
+      const pass = document.getElementById("admin-password").value;
+      if (user === ADMIN_USER && pass === ADMIN_PASSWORD) {
+        document.getElementById("admin-panel").style.display = "block";
+        document.getElementById("admin-login").style.display = "none";
+        // Mostra messaggio di login riuscito
+        alert('Login effettuato correttamente!');
+        const loggedBanner = document.createElement('div');
+        loggedBanner.id = 'admin-logged-banner';
+        loggedBanner.textContent = 'Sei loggato come admin';
+        loggedBanner.style = 'background:#6ed0ff;color:#0a1726;font-weight:700;padding:10px 0;text-align:center;border-radius:8px;margin-bottom:18px;box-shadow:0 2px 8px 0 rgba(110,208,255,0.10);letter-spacing:1px;';
+        document.querySelector('.container').insertBefore(loggedBanner, document.querySelector('.container').firstChild.nextSibling);
+        renderAdminFeedbacks();
+      } else {
+        document.getElementById("admin-error").textContent = "Username o password errati.";
+      }
+    }
+    function renderAdminFeedbacks() {
+      const adminList = document.getElementById("admin-feedback-list");
+      if (feedbacks.length === 0) {
+        adminList.innerHTML = '<div style="color:#6ed0ff;opacity:0.7;">Nessun feedback presente.</div>';
+        return;
+      }
+      adminList.innerHTML = feedbacks.map((fb, idx) => `
+        <div style="background:#18304a;padding:10px 8px;margin-bottom:8px;border-radius:6px;">
+          <b>${fb.name} ${fb.surname}</b> <span style="color:var(--star-selected);">${"&#9733;".repeat(fb.rating)}</span><br>
+          <span style="font-size:0.98rem;">${fb.comment.replace(/</g,"&lt;").replace(/>/g,"&gt;")}</span><br>
+          <button onclick="deleteFeedback(${idx})" style="margin-top:5px;background:#ff3b3b;color:#fff;border:none;border-radius:4px;padding:3px 10px;cursor:pointer;font-size:0.95rem;">Elimina</button>
+        </div>
+      `).join("");
+    }
+    window.deleteFeedback = function(idx) {
+      if (confirm("Sei sicuro di voler eliminare questo feedback?")) {
+        feedbacks.splice(idx, 1);
+        localStorage.setItem("shippingclub_feedbacks", JSON.stringify(feedbacks));
+        updateStats();
+        renderComments();
+        renderAdminFeedbacks();
+      }
+    }
+
+    // Inizializza pagina
+    updateStats();
+    renderComments();
+  </script>
+</body>
+</html>
